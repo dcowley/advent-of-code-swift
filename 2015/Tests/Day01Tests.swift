@@ -15,10 +15,16 @@ struct Day01Tests {
     ")())())": -3,
   ]
   
-  @Test func testPart1() async throws {
+  @Test func testPart1() {
     testData.forEach { input, expected in
       let challenge = Day01(data: input)
       #expect(challenge.part1() == expected)
     }
+  }
+  
+  @Test func testPart2() {
+    #expect(Day01(data: ")").part2() == 1)
+    debugPrint(Day01(data: "()())").part2())
+    #expect(Day01(data: "()())").part2() == 5)
   }
 }
