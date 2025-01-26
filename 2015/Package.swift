@@ -8,7 +8,7 @@ let dependencies: [Target.Dependency] = [
 ]
 
 let package = Package(
-  name: "AdventOfCode",
+  name: "2015",
   platforms: [.macOS(.v13), .iOS(.v16), .watchOS(.v9), .tvOS(.v16)],
   dependencies: [
     .package(
@@ -26,13 +26,13 @@ let package = Package(
   ],
   targets: [
     .executableTarget(
-      name: "AdventOfCode",
+      name: "AoC2015",
       dependencies: dependencies,
       resources: [.copy("Data")]
     ),
     .testTarget(
-      name: "AdventOfCodeTests",
-      dependencies: ["AdventOfCode"] + dependencies
+      name: "AoC2015Tests",
+      dependencies: ["AoC2015"] + dependencies
     )
   ],
   swiftLanguageModes: [.v6]

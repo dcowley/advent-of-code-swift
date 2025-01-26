@@ -1,6 +1,6 @@
 import Testing
 
-@testable import AdventOfCode
+@testable import AoC2015
 
 // Make a copy of this file for every day to ensure the provided smoke tests
 // pass.

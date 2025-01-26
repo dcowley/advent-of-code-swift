@@ -1,5 +1,5 @@
 .DS_Store
-/.build
+.build
 /Packages
 xcuserdata/
 DerivedData/
@@ -8,4 +8,5 @@ DerivedData/
 .netrc
 lcov.info
 Package.resolved
-Sources/Data/Day*.txt
+
+Day*.txt
