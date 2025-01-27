@@ -1,31 +1,5 @@
 import Foundation
-
-enum Direction {
-  case north
-  case east
-  case south
-  case west
-}
-
-struct Point : Hashable {
-  let x: Int
-  let y: Int
-}
-
-extension Point {
-  func move(direction: Direction) -> Point {
-    return switch direction {
-    case .north:
-        .init(x: x, y: y - 1)
-    case .east:
-        .init(x: x + 1, y: y)
-    case .south:
-        .init(x: x, y: y + 1)
-    case .west:
-        .init(x: x - 1, y: y)
-    }
-  }
-}
+import Shared
 
 struct Day03: AdventDay {
   var data: String
