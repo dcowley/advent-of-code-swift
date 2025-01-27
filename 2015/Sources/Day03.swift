@@ -53,4 +53,22 @@ struct Day03: AdventDay {
 
     return visited.count
   }
+
+  func part2() -> Int {
+    var santa = Point(x: 0, y: 0)
+    var robot = santa
+    var visited = Set<Point>([santa])
+
+    directions.indexed().forEach { (index, direction) in
+      if (index % 2 == 0) {
+        santa = santa.move(direction: direction)
+        visited.insert(santa)
+      } else {
+        robot = robot.move(direction: direction)
+        visited.insert(robot)
+      }
+    }
+
+    return visited.count
+  }
 }
