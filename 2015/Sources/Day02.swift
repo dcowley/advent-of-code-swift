@@ -18,4 +18,10 @@ struct Day02: AdventDay {
       sum + 2 * (sides[0] * sides[1] + sides[1] * sides[2] + sides[2] * sides[0]) + (sides[0] * sides[1])
     }
   }
+
+  func part2() -> Int {
+    dimensions.reduce(0) { (sum, sides) in
+      sum + 2 * (sides[0] + sides[1]) + (sides[0] * sides[1] * sides[2])
+    }
+  }
 }
