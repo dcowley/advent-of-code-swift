@@ -26,4 +26,22 @@ struct Day04: AdventDay {
       }
     }
   }
+
+  func part2() -> Int {
+    var i = 0
+    while true {
+      i += 1
+
+      let digest = Insecure.MD5
+        .hash(
+          data: "\(secretKey)\(i)"
+            .data(using: .utf8)!
+        )
+        .flatMap { String(format: "%02hhx", $0) }
+
+      if (digest.prefix(6).allSatisfy { $0 == "0"}) {
+        return i
+      }
+    }
+  }
 }
