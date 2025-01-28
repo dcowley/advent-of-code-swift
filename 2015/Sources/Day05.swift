@@ -8,14 +8,10 @@ struct Day05: AdventDay {
   func part1() throws -> Int {
     let rule1 = try Regex("(?:.*[aeiou].*){3}")
     let rule2 = try Regex("(.)\\1")
-    let rule3 = try Regex("^(?!.*(ab|cd|pq|xy)).*$")
+    let rule3 = try Regex("^(?!.*(ab|cd|pq|xy)).*")
 
     return data.split(separator: "\n").count {
-      !(
-        $0.matches(of: rule1).isEmpty ||
-        $0.matches(of: rule2).isEmpty ||
-        $0.matches(of: rule3).isEmpty
-      )
+      $0.contains(rule1) && $0.contains(rule2) && $0.contains(rule3)
     }
   }
 
@@ -24,10 +20,7 @@ struct Day05: AdventDay {
     let rule2 = try Regex("(.).\\1")
 
     return data.split(separator: "\n").count {
-      !(
-        $0.matches(of: rule1).isEmpty ||
-        $0.matches(of: rule2).isEmpty
-      )
+      $0.contains(rule1) && $0.contains(rule2)
     }
   }
 }
