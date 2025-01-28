@@ -31,21 +31,47 @@ struct Day06: AdventDay {
     }
   }
 
-  func part1() throws -> Int {
+  func part1() -> Int {
     var state = [Bool](repeating: false, count: 1000 * 1000)
+
     instructions.forEach {
         for x in $0.start.x ... $0.end.x {
           for y in $0.start.y ... $0.end.y {
             let index = x + y * 1000
-            state[index] = switch $0.action {
-            case .turnOn: true
-            case .turnOff: false
-            case .toggle: !state[index]
+            switch $0.action {
+            case .turnOn:
+              state[index] = true
+            case .turnOff:
+              state[index] = false
+            case .toggle:
+              state[index] = !state[index]
             }
           }
         }
     }
 
     return state.count(where: { $0 })
+  }
+
+  func part2() -> Int {
+      var state = [Int](repeating: 0, count: 1000 * 1000)
+
+      instructions.forEach {
+          for x in $0.start.x ... $0.end.x {
+            for y in $0.start.y ... $0.end.y {
+              let index = x + y * 1000
+              switch $0.action {
+              case .turnOn:
+                state[index] += 1
+              case .turnOff:
+                state[index] = max(0, state[index] - 1)
+              case .toggle:
+                state[index] += 2
+              }
+            }
+          }
+      }
+
+    return state.reduce(0, +)
   }
 }

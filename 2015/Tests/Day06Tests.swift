@@ -8,4 +8,9 @@ struct Day06Tests {
     #expect(try Day06(data: "toggle 0,0 through 999,0").part1() == 1_000)
     #expect(try Day06(data: "turn on 0,0 through 999,999\nturn off 499,499 through 500,500").part1() == 999_996)
   }
+
+  @Test func testPart2() throws {
+    #expect(try Day06(data: "turn on 0,0 through 0,0").part2() == 1)
+    #expect(try Day06(data: "toggle 0,0 through 999,999").part2() == 2_000_000)
+  }
 }
