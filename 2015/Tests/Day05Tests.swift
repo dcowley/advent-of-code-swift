@@ -10,4 +10,11 @@ struct Day05Tests {
     #expect(try Day05(data: "haegwjzuvuyypxyu").part1() == 0)
     #expect(try Day05(data: "dvszwmarrgswjxmb").part1() == 0)
   }
+
+  @Test func testPart2() throws {
+    #expect(try Day05(data: "qjhvhtzxzqqjkmpb").part2() == 1)
+    #expect(try Day05(data: "xxyxx").part2() == 1)
+    #expect(try Day05(data: "uurcxstgmygtbstg").part2() == 0)
+    #expect(try Day05(data: "ieodomkazucvgmuy").part2() == 0)
+  }
 }
