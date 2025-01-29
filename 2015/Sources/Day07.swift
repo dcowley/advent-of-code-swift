@@ -53,8 +53,11 @@ struct Day07: AdventDay {
     })
   }
 
-  func part1() -> UInt16 {
+  private func solve(override: UInt16? = nil) -> UInt16 {
     var wires = [String: UInt16]()
+    if let override = override {
+      wires["b"] = override
+    }
 
     func emulate(_ wire: String) -> UInt16 {
       if let value = wires[wire] {
@@ -89,5 +92,13 @@ struct Day07: AdventDay {
     }
 
     return emulate(self.wire)
+  }
+
+  func part1() -> UInt16 {
+    solve()
+  }
+
+  func part2() -> UInt16 {
+    solve(override: part1())
   }
 }
