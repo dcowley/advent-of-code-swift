@@ -12,4 +12,8 @@ struct Day09Tests {
   @Test func testPart1() {
     #expect(Day09(data: testData).part1() == 605)
   }
+
+  @Test func testPart2() {
+    #expect(Day09(data: testData).part2() == 982)
+  }
 }
