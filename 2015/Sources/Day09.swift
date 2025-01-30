@@ -50,6 +50,34 @@ struct Day09: AdventDay {
     return distances.keys.map(tsp(initial:)).min()!
   }
 
+  func part2() -> Int {
+    let finalState = (1 << distances.keys.count) - 1
+    let cities = distances.keys.sorted()
+
+    func dfs(city: String, state: Int, dist: Int = 0, visited: Set<Int>) -> Int {
+      var visited = visited
+      visited.insert(state)
+
+      if state == finalState {
+        return dist
+      }
+
+      var maxDist = Int.min
+      distances[city]!.forEach { (nextCity, nextDist) in
+        let nextState = state | (1 << cities.firstIndex(of: nextCity)!)
+        if !visited.contains(nextState) {
+          maxDist = max(maxDist, dfs(city: nextCity, state: nextState, dist: dist + nextDist, visited: visited))
+        }
+      }
+
+      return maxDist
+    }
+
+    return distances.keys
+      .map { dfs(city: $0, state: 1 << cities.firstIndex(of: $0)!, visited: Set<Int>()) }
+      .max()!
+  }
+
   struct Node: Comparable {
     let city: String
     let dist: Int
