@@ -3,6 +3,14 @@ import Foundation
 struct Day10: AdventDay {
   var data: String
 
+  func solve(iterations: Int) -> Int {
+      var text = data.trimmingCharacters(in: .newlines)
+      for _ in 0..<iterations {
+        text = next(text)
+      }
+      return text.count
+  }
+
   func next(_ input: String) -> String {
     input.matches(of: /(.)\1*/)
       .map { "\($0.output.0.count)\($0.output.1)" }
@@ -10,18 +18,10 @@ struct Day10: AdventDay {
   }
 
   func part1() -> Int {
-    var text = data.trimmingCharacters(in: .newlines)
-    for _ in 0..<40 {
-      text = next(text)
-    }
-    return text.count
+    solve(iterations: 40)
   }
 
   func part2() -> Int {
-    var text = data.trimmingCharacters(in: .newlines)
-    for _ in 0..<50 {
-      text = next(text)
-    }
-    return text.count
+    solve(iterations: 50)
   }
 }
