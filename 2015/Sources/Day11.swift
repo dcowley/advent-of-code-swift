@@ -19,8 +19,8 @@ struct Day11: AdventDay {
     alphabet.count(where: { text.contains([$0, $0]) }) >= 2
   }
 
-  func part1() -> String {
-    var text: [Character] = Array(data.trimmingCharacters(in: .newlines))
+  private func solve(initial: String) -> String {
+    var text: [Character] = Array(initial.trimmingCharacters(in: .newlines))
 
     repeat {
       disallowed.forEach {
@@ -44,5 +44,14 @@ struct Day11: AdventDay {
     } while !(hasStraight(text: text) && hasPairs(text: text))
 
     return String(text)
+  }
+
+  func part1() -> String {
+    solve(initial: data)
+  }
+
+
+  func part2() -> String {
+    solve(initial: part1())
   }
 }
