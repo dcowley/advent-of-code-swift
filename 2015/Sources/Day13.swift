@@ -38,7 +38,7 @@ struct Day13: AdventDay {
     return relationships
   }
 
-  func part1() -> Int {
+  private func solve(_ relationships: [String: [String: Int]]) -> Int {
     let permutations = relationships.keys.permutations(ofCount: relationships.keys.count)
 
     var cache: Dictionary<Pair, Int> = [:]
@@ -55,5 +55,20 @@ struct Day13: AdventDay {
         return $0 + change
       }
     }.max()!
+  }
+
+  func part1() -> Int {
+    solve(relationships)
+  }
+
+  func part2() -> Int {
+    var relationships = relationships
+    let guests = relationships.keys
+    relationships["Dean"] = Dictionary(uniqueKeysWithValues: guests.map { ($0, 0) })
+    guests.forEach {
+      relationships[$0]!["Dean"] = 0
+    }
+
+    return solve(relationships)
   }
 }
