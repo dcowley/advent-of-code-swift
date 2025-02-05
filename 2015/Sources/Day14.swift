@@ -32,13 +32,32 @@ struct Day14: AdventDay {
     )
   }
 
-  func part1() -> Int {
-    reindeers.map { name, reindeer in
-      let intervals =  totalTime / (reindeer.moveSeconds + reindeer.restSeconds)
-      let remaining = min(reindeer.moveSeconds, totalTime - intervals * (reindeer.moveSeconds + reindeer.restSeconds))
+  private func solve(seconds: Int) -> [String: Int] {
+    Dictionary(uniqueKeysWithValues: reindeers.map { name, reindeer in
+      let intervals =  seconds / (reindeer.moveSeconds + reindeer.restSeconds)
+      let remaining = min(reindeer.moveSeconds, seconds - intervals * (reindeer.moveSeconds + reindeer.restSeconds))
 
-      return reindeer.displacement(over: reindeer.moveSeconds * intervals + remaining)
-    }.max()!
+      return (name, reindeer.displacement(over: reindeer.moveSeconds * intervals + remaining))
+    })
+  }
+
+  func part1() -> Int {
+    solve(seconds: totalTime).values.max()!
+  }
+
+  func part2() -> Int {
+    var points = [String: Int]()
+
+    for i in 0..<totalTime {
+      let displacements = solve(seconds: i + 1)
+      let max = displacements.values.max()!
+
+      displacements.filter { (_, displacement) in displacement == max }.keys.forEach { name in
+        points[name, default: 0] += 1
+      }
+    }
+
+    return points.values.max()!
   }
 
   private struct Reindeer {

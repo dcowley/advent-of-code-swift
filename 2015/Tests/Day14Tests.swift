@@ -14,4 +14,10 @@ struct Day14Tests {
     #expect(Day14(data: testData, totalTime: 12).part1() == 176)
     #expect(Day14(data: testData, totalTime: 1000).part1() == 1120)
   }
+
+  @Test func testPart2() {
+    #expect(Day14(data: testData, totalTime: 1).part2() == 1)
+    #expect(Day14(data: testData, totalTime: 140).part2() == 139)
+    #expect(Day14(data: testData, totalTime: 1000).part2() == 689)
+  }
 }
