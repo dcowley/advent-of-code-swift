@@ -56,6 +56,24 @@ struct Day15: AdventDay {
     return combos.max()!
   }
 
+  func part2() -> Int {
+    let ingredients = ingredients
+    let combos = combinations(total: 100, num: ingredients.count)
+      .map {
+        $0.indexed()
+          .map { index, teaspoons in
+            ingredients[index].score(teaspoons)
+          }
+          .reduce(Ingredient.Score.zero) { sum, score in
+            sum + score
+          }
+      }
+      .filter { $0.calories == 500 }
+      .map { $0.total }
+
+    return combos.max()!
+  }
+
   private struct Ingredient {
     let name: String
     let capacity: Int
