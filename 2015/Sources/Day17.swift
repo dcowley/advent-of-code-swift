@@ -17,18 +17,18 @@ struct Day17: AdventDay {
     self.target = target
   }
 
-  func part1() -> Int {
+  private func solve() -> [[Int]] {
     containers
       .combinations(ofCount: 1...containers.count)
       .filter { $0.reduce(0, +) == target }
-      .count
+  }
+
+  func part1() -> Int {
+    solve().count
   }
 
   func part2() -> Int {
-    let combinations = containers
-      .combinations(ofCount: 1...containers.count)
-      .filter { $0.reduce(0, +) == target }
-
+    let combinations = solve()
     let minCount = combinations.min(by: { $0.count < $1.count })?.count
 
     return combinations
