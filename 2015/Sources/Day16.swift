@@ -32,7 +32,7 @@ struct Day16: AdventDay {
   func part1() -> Int {
     aunts.first { _, attrs in
       self.attrs.allSatisfy { key, value in
-        !attrs.keys.contains(key) || attrs[key] == value
+        attrs[key, default: value] == value
       }
     }?.key ?? -1
   }
@@ -40,17 +40,13 @@ struct Day16: AdventDay {
   func part2() -> Int {
     aunts.first { _, attrs in
       self.attrs.allSatisfy { key, value in
-        guard attrs.keys.contains(key) else {
-          return true
-        }
-
         return switch key {
         case "cats", "trees":
-          attrs[key]! > value
+          attrs[key, default: Int.max] > value
         case "pomeranians", "goldfish":
-          attrs[key]! < value
+          attrs[key, default: Int.min] < value
         default:
-          attrs[key] == value
+          attrs[key, default: value] == value
         }
       }
     }?.key ?? -1
