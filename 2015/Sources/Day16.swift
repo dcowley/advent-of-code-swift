@@ -30,10 +30,29 @@ struct Day16: AdventDay {
   }
 
   func part1() -> Int {
-    var filtered = aunts
-    attrs.forEach { key, value in
-      filtered = filtered.filter { !$1.keys.contains(key) || $1[key] == value }
-    }
-    return filtered.keys.first ?? -1
+    aunts.first { _, attrs in
+      self.attrs.allSatisfy { key, value in
+        !attrs.keys.contains(key) || attrs[key] == value
+      }
+    }?.key ?? -1
+  }
+
+  func part2() -> Int {
+    aunts.first { _, attrs in
+      self.attrs.allSatisfy { key, value in
+        guard attrs.keys.contains(key) else {
+          return true
+        }
+
+        return switch key {
+        case "cats", "trees":
+          attrs[key]! > value
+        case "pomeranians", "goldfish":
+          attrs[key]! < value
+        default:
+          attrs[key] == value
+        }
+      }
+    }?.key ?? -1
   }
 }
