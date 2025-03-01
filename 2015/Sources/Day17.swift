@@ -23,4 +23,16 @@ struct Day17: AdventDay {
       .filter { $0.reduce(0, +) == target }
       .count
   }
+
+  func part2() -> Int {
+    let combinations = containers
+      .combinations(ofCount: 1...containers.count)
+      .filter { $0.reduce(0, +) == target }
+
+    let minCount = combinations.min(by: { $0.count < $1.count })?.count
+
+    return combinations
+      .filter { $0.count == minCount }
+      .count
+  }
 }
