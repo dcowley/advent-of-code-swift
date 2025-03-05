@@ -14,6 +14,14 @@ struct Day18: AdventDay {
       }
     }
   }
+  private var corners: [(Int, Int)] {
+    [
+      (0, 0),
+      (0, height - 1),
+      (width - 1, 0),
+      (width - 1, height - 1),
+    ]
+  }
 
   private var grid: [[Bool]] {
     data.split(separator: /\n/).map {
@@ -60,6 +68,40 @@ struct Day18: AdventDay {
     return state.reduce(0) { count, row in
       count + row.count { $0 }
     }
+  }
+
+  func part2() -> Int {
+    var state = grid
+    for (x, y) in corners {
+      state[y][x] = true
+    }
+    var nextState = state
+
+    for _ in 0..<steps {
+      for (x, y) in coordinates.filter({ x, y in !isCorner(x, y) }) {
+        let isOn = state[y][x]
+        let neighbours = neighbours(x, y)
+
+        switch neighbours.count(where: { x, y in state[y][x] }) {
+        case 2 where isOn:
+          nextState[y][x] = true
+        case 3:
+          nextState[y][x] = true
+        default:
+          nextState[y][x] = false
+        }
+      }
+
+      state = nextState
+    }
+
+    return state.reduce(0) { count, row in
+      count + row.count { $0 }
+    }
+  }
+
+  private func isCorner(_ x: Int, _ y: Int) -> Bool {
+    corners.contains(where: { $0 == (x, y) })
   }
 
   private func neighbours(_ x: Int, _ y: Int) -> [(Int, Int)] {
