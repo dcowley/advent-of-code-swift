@@ -42,32 +42,35 @@ struct Day18: AdventDay {
     self.height = height
   }
 
-  func part1() -> Int {
-    var state = grid
-    var nextState = state
+  private func solve(_ initialState: [[Bool]], coordinates: [(Int, Int)]) -> Int {
+      var state = initialState
+      var nextState = state
 
-    for _ in 0..<steps {
+      for _ in 0..<steps {
+        for (x, y) in coordinates {
+          let isOn = state[y][x]
+          let neighbours = neighbours(x, y)
 
-      for (x, y) in coordinates {
-        let isOn = state[y][x]
-        let neighbours = neighbours(x, y)
-
-        switch neighbours.count(where: { x, y in state[y][x] }) {
-        case 2 where isOn:
-          nextState[y][x] = true
-        case 3:
-          nextState[y][x] = true
-        default:
-          nextState[y][x] = false
+          switch neighbours.count(where: { x, y in state[y][x] }) {
+          case 2 where isOn:
+            nextState[y][x] = true
+          case 3:
+            nextState[y][x] = true
+          default:
+            nextState[y][x] = false
+          }
         }
+
+        state = nextState
       }
 
-      state = nextState
-    }
+      return state.reduce(0) { count, row in
+        count + row.count { $0 }
+      }
+  }
 
-    return state.reduce(0) { count, row in
-      count + row.count { $0 }
-    }
+  func part1() -> Int {
+    solve(grid, coordinates: coordinates)
   }
 
   func part2() -> Int {
@@ -75,29 +78,7 @@ struct Day18: AdventDay {
     for (x, y) in corners {
       state[y][x] = true
     }
-    var nextState = state
-
-    for _ in 0..<steps {
-      for (x, y) in coordinates.filter({ x, y in !isCorner(x, y) }) {
-        let isOn = state[y][x]
-        let neighbours = neighbours(x, y)
-
-        switch neighbours.count(where: { x, y in state[y][x] }) {
-        case 2 where isOn:
-          nextState[y][x] = true
-        case 3:
-          nextState[y][x] = true
-        default:
-          nextState[y][x] = false
-        }
-      }
-
-      state = nextState
-    }
-
-    return state.reduce(0) { count, row in
-      count + row.count { $0 }
-    }
+    return solve(state, coordinates: coordinates.filter({ x, y in !isCorner(x, y) }))
   }
 
   private func isCorner(_ x: Int, _ y: Int) -> Bool {
