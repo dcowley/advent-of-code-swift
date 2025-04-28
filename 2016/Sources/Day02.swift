@@ -1,15 +1,10 @@
+import Foundation
 import Shared
 
 struct Day02: AdventDay {
   let data: String
 
-  private let keypad: [[String]] = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"],
-  ]
-
-  private var inputs: [[Direction]] {
+  private var directions: [[Direction]] {
     data.split(separator: /\n/).map { line in
       line.compactMap {
         switch $0 {
@@ -23,24 +18,44 @@ struct Day02: AdventDay {
     }
   }
 
-  func part1() -> String {
-    var (x, y) = (1, 1)
+  private func solve(keypad: [[Character]], initial: (Int, Int)) -> String {
+    let rows = keypad.count
+    let cols = keypad.first!.count
+
+    var position = initial
     var code = ""
 
-    inputs.forEach {
+    directions.forEach {
       $0.forEach {
-        (x, y) = switch $0 {
-        case .north: (x, max(y - 1, 0))
-        case .south: (x, min(y + 1, 2))
-        case .west: (max(x - 1, 0), y)
-        case .east: (min(x + 1, 2), y)
+        var (col, row) = position
+        (col, row) = switch $0 {
+        case .north: (col, max(row - 1, 0))
+        case .south: (col, min(row + 1, rows - 1))
+        case .west: (max(col - 1, 0), row)
+        case .east: (min(col + 1, cols - 1), row)
+        }
+
+        let key = keypad[row][col]
+        if key.isLetter || key.isNumber {
+          position = (col, row)
         }
       }
 
-      code += keypad[y][x]
+      let (col, row) = position
+      code += String(keypad[row][col])
     }
 
     return code
+  }
+
+  func part1() -> String {
+    let keypad = """
+    123
+    456
+    789
+    """.split(separator: /\n/).map { Array($0) }
+
+    return solve(keypad: keypad, initial: (1, 1))
   }
 
   func part2() -> String {
@@ -50,29 +65,8 @@ struct Day02: AdventDay {
     56789
      ABC 
       D  
-    """.replacing(/\n/, with: "")
+    """.split(separator: /\n/).map { Array($0) }
 
-    var (x, y) = (0, 2)
-    var code = ""
-
-    inputs.forEach {
-      $0.forEach {
-        let (nextX, nextY) = switch $0 {
-        case .north: (x, max(y - 1, 0))
-        case .south: (x, min(y + 1, 4))
-        case .west: (max(x - 1, 0), y)
-        case .east: (min(x + 1, 4), y)
-        }
-
-        let index = keypad.index(keypad.startIndex, offsetBy: nextX + 5 * nextY)
-        if !keypad[index].isWhitespace {
-          (x, y) = (nextX, nextY)
-        }
-      }
-
-      code += "\(keypad[keypad.index(keypad.startIndex, offsetBy: x + 5 * y)])"
-    }
-
-    return code
+    return solve(keypad: keypad, initial: (0, 2))
   }
 }
