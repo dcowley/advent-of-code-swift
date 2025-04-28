@@ -42,4 +42,37 @@ struct Day02: AdventDay {
 
     return code
   }
+
+  func part2() -> String {
+    let keypad = """
+      1  
+     234 
+    56789
+     ABC 
+      D  
+    """.replacing(/\n/, with: "")
+
+    var (x, y) = (0, 2)
+    var code = ""
+
+    inputs.forEach {
+      $0.forEach {
+        let (nextX, nextY) = switch $0 {
+        case .north: (x, max(y - 1, 0))
+        case .south: (x, min(y + 1, 4))
+        case .west: (max(x - 1, 0), y)
+        case .east: (min(x + 1, 4), y)
+        }
+
+        let index = keypad.index(keypad.startIndex, offsetBy: nextX + 5 * nextY)
+        if !keypad[index].isWhitespace {
+          (x, y) = (nextX, nextY)
+        }
+      }
+
+      code += "\(keypad[keypad.index(keypad.startIndex, offsetBy: x + 5 * y)])"
+    }
+
+    return code
+  }
 }
