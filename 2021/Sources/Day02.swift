@@ -40,4 +40,24 @@ struct Day02: AdventDay {
 
     return position * depth
   }
+
+  func part2() throws -> Int {
+    var position = 0
+    var depth = 0
+    var aim = 0
+
+    commands.forEach { (direction, units) in
+      switch direction {
+      case .forward:
+        position += units
+        depth += aim * units
+      case .down:
+        aim += units
+      case .up:
+        aim -= units
+      }
+    }
+
+    return position * depth
+  }
 }
