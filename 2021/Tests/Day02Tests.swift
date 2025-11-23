@@ -21,4 +21,8 @@ struct Day02Tests {
   @Test func part1() throws {
     #expect(try day.part1() == 150)
   }
+
+  @Test func part2() throws {
+    #expect(try day.part2() == 900)
+  }
 }
