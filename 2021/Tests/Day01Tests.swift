@@ -16,10 +16,17 @@ struct Day01Tests {
   263
   """
 
-  private lazy var day = Day01(data: testData)
+  private let day: Day01
 
-  @Test
-  mutating func part1() throws {
+  init() {
+    self.day = Day01(data: testData)
+  }
+
+  @Test func part1() throws {
     #expect(try day.part1() == 7)
+  }
+
+  @Test func part2() async throws {
+    #expect(try day.part2() == 5)
   }
 }
