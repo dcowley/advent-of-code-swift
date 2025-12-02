@@ -4,13 +4,23 @@ import Testing
 
 struct Day01Tests {
   private let testData = """
+  L68
+  L30
+  R48
+  L5
+  R60
+  L55
+  L1
+  L99
+  R14
+  L82
   """
 
   @Test func testPart1() throws {
-    #expect(try Day01(data: testData).part1() == Int.max)
+    #expect(try Day01(data: testData).part1() == 3)
   }
 
   @Test func testPart2() throws {
-    #expect(try Day01(data: testData).part2() == Int.max)
+    #expect(try Day01(data: testData).part2() == 6)
   }
 }
