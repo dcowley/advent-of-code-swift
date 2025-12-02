@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2600"
+   LastUpgradeVersion = "2610"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AoC2021"
-               BuildableName = "AoC2021"
-               BlueprintName = "AoC2021"
+               BlueprintIdentifier = "AoC2015"
+               BuildableName = "AoC2015"
+               BlueprintName = "AoC2015"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,9 +34,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AoC2021Tests"
-               BuildableName = "AoC2021Tests"
-               BlueprintName = "AoC2021Tests"
+               BlueprintIdentifier = "AoC2015Tests"
+               BuildableName = "AoC2015Tests"
+               BlueprintName = "AoC2015Tests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AoC2021"
-            BuildableName = "AoC2021"
-            BlueprintName = "AoC2021"
+            BlueprintIdentifier = "AoC2015"
+            BuildableName = "AoC2015"
+            BlueprintName = "AoC2015"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -73,9 +73,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AoC2021"
-            BuildableName = "AoC2021"
-            BlueprintName = "AoC2021"
+            BlueprintIdentifier = "AoC2015"
+            BuildableName = "AoC2015"
+            BlueprintName = "AoC2015"
             ReferencedContainer = "container:">
          </BuildableReference>
       </BuildableProductRunnable>
